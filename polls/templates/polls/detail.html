@@ -1,0 +1,77 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+<a class="btn btn-secondary btn-sm mb-3" href="{% url 'polls:index' %}">Back To Polls</a>
+<h1 class="text-center mb-3">{{ question.question_text }}</h1>
+
+{% if error_message %}
+<p class="alert alert-danger">
+    <strong>{{ error_message }}</strong>
+</p>
+{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post" id="form">
+    {% csrf_token %}
+    {{ form|crispy }}
+    {% for choice in question.choice_set.all %}
+    <div class="form-check">
+        <input type="radio" name="choice" class="form-check-input" id="choice{{ forloop.counter }}"
+            value="{{ choice.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+    </div>
+    {% endfor %}
+    <input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4" />
+</form>
+
+
+
+<script
+        src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+        crossorigin="anonymous"></script>
+
+    <script>
+    const form = document.getElementById('form');
+    form.addEventListener("submit", submitHandler);
+
+    function submitHandler(e) {
+        e.preventDefault();
+        $.ajax({
+            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url         : '{% url 'polls:vote' question.id %}', // the url where we want to POST
+            data        : $('#form').serialize(), // our form data
+            dataType    : 'json', // what type of data do we expect back from the server
+            success     : successFunction
+        });
+    }
+
+    function successFunction(msg) {
+        console.log('hi')
+        if (msg.message === 'Success') {
+            if(!alert("sucess"))
+            window.location.replace('{% url 'polls:results' question.id %}');
+        }
+        else{
+        alert("error")
+
+       }
+    }
+</script>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+
+{% endblock %}

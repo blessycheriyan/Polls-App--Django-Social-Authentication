@@ -1,0 +1,201 @@
+{% load i18n %}
+<!DOCTYPE html>
+
+{% load crispy_forms_filters %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Polls {% block title %}{% endblock %}</title>
+
+
+
+     <link href="{% static 'assets1/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets1/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets1/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets1/vendor/aos/aos.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets1/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="/">Polls</a>
+      &nbsp;
+            &nbsp;
+            &nbsp;
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ &nbsp;
+            &nbsp;
+            &nbsp;
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+    &nbsp;
+            &nbsp;
+            &nbsp;
+         &nbsp;
+            &nbsp;
+            &nbsp;
+  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'polls:userlogin' %}">Login <span class="sr-only">(current)</span></a>
+      </li>
+           &nbsp;
+           &nbsp;
+           &nbsp;
+          <li class="nav-item active">
+        <a class="nav-link" href="{%url 'polls:register' %}">Register <span class="sr-only">(current)</span></a>
+      </li>
+
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Language
+          </a>
+
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% get_current_language as LANGUAGE_CODE %}
+
+              {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+
+            {% for lang in languages %}
+              <li>
+              <a class="dropdown-item" href="/{{ lang.code }}/">
+                  {{ lang.name_local }}
+              </a>
+              </li>
+            {% endfor %}
+
+          </ul>
+        </li>
+
+    </ul>
+
+
+</nav>
+
+{% load cache %}
+ {% cache 500 mycache %}
+
+
+ <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url({% static 'images/bus1.png' %});">
+          <div class="carousel-container">
+            <div class="container">
+
+              <h2 class="animate__animated animate__fadeInDown">{% translate "Welcome to" %} <span>{% translate "Polling System" %}</span></h2>
+
+              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">{% translate "Read More" %}</a>
+    </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item" style="background-image: url({% static 'images/home.jpg' %});">
+          <div class="carousel-container">
+            <div class="container">
+
+              <h2 class="animate__animated animate__fadeInDown">{% translate "Polling System" %} </h2>
+
+              <p class="animate__animated animate__fadeInUp">{% translate "At least 60 per cent of the country wants the strikers to win, polls show in our website · We are doing a weekly poll on the president, and clearly his popularity has declined." %}</p>
+              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">{% translate "Read More" %}</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item" style="background-image: url({% static 'images/home3.png' %});">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">{% translate "Polling System" %}</h2>
+              <p class="animate__animated animate__fadeInUp">{% translate "A sampling or collection of opinions on a subject, taken from either a selected or a random group of persons, as for the purpose of analysis." %}</p>
+              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">{% translate "Read More" %}</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon icofont-simple-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon icofont-simple-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+    </div>
+  </section><!-- End Hero -->
+<br>
+ <br>
+ <br>
+ <form action="{%url 'polls:email_list_signup' %}" method="post" class="p-5" nonvalidate>{%csrf_token%}
+<input type="email" name="email" class="form-control">{{fm}}
+     <br>
+     <br>
+
+
+      <button type="submit" class="btn btn-dark  btn-block">Subcribe</button>
+
+
+          </form>
+<div class="col-md-6">
+ {% include 'contact/contact.html' %}
+</div>
+ <br>
+  <br>
+{% block content %}
+
+{% include 'polls/footer.html' %}
+{% endblock %}
+{% endcache %}
+ <!-- Vendor JS Files -->
+  <script src="{% static 'assets1/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets1/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/venobox/venobox.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets1/vendor/aos/aos.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets1/js/main.js' %}"></script>
+
+</body>
+
+</html>

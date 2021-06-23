@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% load crispy_forms_filters %}
+
+{% block content %}
+<h2>Update Form</h2>
+        <img src="{{user.profile.profile_pic.url}}" class="rounded-circle" height="300px" width="300px">
+
+
+
+
+
+ <form action="{% url 'polls:update'  %}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+
+
+
+a
+
+
+     {% csrf_token %}
+
+
+
+ {{f1.first_name|as_crispy_field}}
+         {{f1.last_name|as_crispy_field}}
+         {{f1.email|as_crispy_field}}
+         {{f1.username|as_crispy_field}}
+         {{f2|crispy}}
+
+
+         <button type="submit" value="save" class="btn btn-primary btn-block">Save</button>
+
+     </form>
+
+
+
+
+
+        </div>
+
+<script>
+    function viewImage(event){
+    document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+
+    <script>
+    const form = document.getElementById('form');
+    form.addEventListener("submit", submitHandler);
+
+    function submitHandler(e) {
+        e.preventDefault();
+        $.ajax({
+            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url         : '{% url 'polls:update' %}', // the url where we want to POST
+            data        : $('#form').serialize(), // our form data
+            dataType    : 'json', // what type of data do we expect back from the server
+            success     : successFunction
+        });
+    }
+
+ function successFunction(msg) {
+        console.log('hi')
+        if (msg.message === 'Success') {
+            if(!alert("sucess"))
+            window.location.replace('{% url 'polls:userindexview' %}');
+        }
+        else{
+        alert("error")
+
+       }
+    }
+</script>
+
+<!DOCTYPE html>
+{% load social_share %}
+<html lang="en">
+<head>
+
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+<h2 class="text-primary">Share This Post</h2>
+<div class="social">
+
+
+    <a>{% __facebook object_or_url "<i class='fa fa-3x fa-facebook-square'></i> " %}</a>
+
+    <a>{% _whatsapp object_or_url "<i  class='fa fa-3x fa-whatsapp'></i>" %}</a>
+
+
+    <a>{% plus object_or_url "<i  style='font-size:48px;color:red'; class='fa fa-3x fa-google-plus'></i>" %}</a>
+
+</div>
+
+</div>
+<style>
+.fa-whatsapp  {
+  color:#fff;
+  background:
+   linear-gradient(#25d366,#25d366) 14% 84%/16% 16% no-repeat,
+   radial-gradient(#25d366 58%,transparent 0);
+}
+
+
+.fa-facebook-square {
+  color: #3b5998;
+  background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
+  background-size: 55%;
+  background-position: 70% 0;
+  background-repeat: no-repeat;
+}
+.social a {
+ padding:3px;
+}
+.social {
+  display:flex;
+  padding:15px;
+
+  text-align:center;
+}
+    body{
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+</style>
+
+
+
+
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+
+
+{% endblock %}
+
+
+</body>
+</html>

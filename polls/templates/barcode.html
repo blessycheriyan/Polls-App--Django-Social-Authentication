@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<body>
+
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success text-center mt-5">{{message}}</div>
+    {%endfor%}
+
+    {%endif%}
+
+    <div class="container text-center mt-5">
+
+<h3 class="text-primary">Django Barcode</h3>
+<hr>
+<form method="post">{% csrf_token%}
+
+<label for="Product">Product Name : - </label> <input required type="text" id="product" name="product-name"> <br><br>
+<label for="Batch">Batch Number : - </label> <input required type="text" id="Batch" name="batch-number">
+<br><br>
+
+<button class="btn btn-primary">Generate Barcode</button>
+</form>
+
+
+    </div>
+
+
+<div class="mt-5 container">
+
+<div class="row">
+
+    {% for product in p %}
+
+    <div class="col-sm-4">
+        <img src="{{product.barcode.url}}" class="img-fluid">
+    </div>
+
+    {%endfor%}
+</div>
+
+</div>
+
+ {% endblock %}
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+<script src="https://cdn.jsdelivr.net/sharer.js/latest/sharer.min.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=861152141134748&autoLogAppEvents=1" nonce="VL9IxKG5"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+      <style>
+        .remove_button_css {
+  outline: none;
+  padding: 5px;
+  border: 0px;
+  box-sizing: none;
+  background-color: transparent;
+  color:white;
+}
+    </style>
+
+  </head>
+  <body>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="{% url 'polls:userindexview' %}">Polls</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'polls:userindexview' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+       <li class="nav-item active">
+       <a class="nav-link" href="{% url 'polls:update' %}"><i class='far fa-edit' style='font-size:22px'>Edit</i> </a>
+      </li>
+         <li class="nav-item active">
+       <a class="nav-link" href="{% url 'polls:paypal' %}">Paypal<span class="sr-only">(current)</span></a>
+      </li>
+           <li class="nav-item active">
+        <a class="nav-link" href="{% url 'polls:password' %}">Change Password <span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item active">
+
+       <a class="nav-link" href="{% url 'polls:delete_view' request.user.pk  %}">Deactivate<span class="sr-only">(current)</span></a>
+      </li>
+
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Section
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'polls:weather' %}">Weather</a>
+             <a class="dropdown-item" href="{% url 'polls:screenshot' %}">Screenshot</a>
+          <a class="dropdown-item" href="{% url 'polls:url-shortner' %}">Url Shortener</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'polls:news' %}">News Applications</a>
+             <a class="dropdown-item" href="{% url 'polls:barcode' %}">Create Barcode</a>
+                <a class="dropdown-item" href="{% url 'polls:QRCodeGenerator' %}">Create Qrcodearcode</a>
+        </div>
+      </li>
+  <li class="nav-item active">
+
+      <form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button type="submit" class="remove_button_css ">Logout</button>
+</form>
+<!--        <a class="nav-link" href="{% url 'polls:logout' %}">Logout <span class="sr-only">(current)</span></a>-->
+      </li>
+
+
+&nbsp;
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+
+       <li class="nav-item active pl-5">
+
+        <h2 style="color:white";>{{user.first_name}} {{user.last_name}}    </h2>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+
+
+
+
+
+
+<br>
+ <br>
+ <br>
+
+
+
+
+    <div class="container">
+         <br>
+        <div class="row">
+            <div class=".col-md-6 m-auto">
+{% block content %}
+                  {% endblock %}
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% include 'polls/footer.html'%}
+</body>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

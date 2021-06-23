@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load qr_code %}
+
+{% block content %}
+<center>
+<div class="container qrcode">
+<form method="post" class="text-center mt-5 d-flex"  enctype="multipart/form-data">
+    {% csrf_token %}
+  <input type="url" placeholder="type an url" required name="url" class="form-control" >
+
+     <button class="btn btn-primary mx-3">Generate Qrcode</button>
+</form>
+</div>
+
+  <div class="container text-center mt-5">
+
+<div class="row">
+
+    {% for qr in qr_code %}
+
+<div class="col-sm-4 border p-3">
+<!--    <img src={{qr.qr}}><br>-->
+    {% qr_from_text qr.url size="s" image_format="png" error_correction="L" %}
+    <small>
+
+        {{qr.url}}</small>
+
+    </div>
+
+  {%endfor%}
+</div>
+  </div>
+</center>
+{%endblock%}
